@@ -1,0 +1,43 @@
+<div class="explore-container">
+    <div class="content-container">
+      <div (click)="goToPorfile()" class="goToPorfile">Profile</div>
+  
+      <!-- Bara de căutare -->
+      <div class="search-section">
+        <input
+          type="text"
+          placeholder="Search tag/name"
+          class="search-input"
+          [(ngModel)]="searchQuery"
+        />
+        <div class="buton-container">
+          <button class="search-button" (click)="searchConversations()">🔎</button>
+          <button class="search-button" (click)="clearQuery()">❌</button>
+        </div>
+  
+        <div class="tags">
+          <strong>Trending: </strong>
+          <p *ngFor="let tag of tags" (click)="onTagClick(tag)" class="tag-item"># {{ tag }}</p>
+        </div>
+      </div>
+  
+      <button class="random-button" (click)="randomConversation()">
+        Random conversation
+      </button>
+  
+      <div class="conversations-section">
+        <ul class="conversation-list">
+          <li
+            class="conversation-item"
+            *ngFor="let conversation of filteredConversations"
+          >
+            <span>{{ conversation.title }}</span>
+            <button class="join-button" (click)="joinConversation(conversation.id)">
+              +
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

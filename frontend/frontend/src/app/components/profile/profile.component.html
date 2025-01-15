@@ -1,0 +1,27 @@
+<div class="profile-container">
+    <!-- Secțiunea completă a profilului și conversațiilor -->
+    <div class="profile-content">
+      <!-- Secțiunea de profil -->
+      <div class="profile-section">
+        <img src="profile-avatar.png" alt="Profile" class="profile-avatar" />
+        <h2 class="username">{{username}}</h2>
+        <button class="action-button" (click)="createConversation()">Create conversation</button>
+        <button class="action-button" (click)="exploreConversations()">Explore conversation</button>
+      </div>
+  
+      <!-- Secțiunea de conversații -->
+      <div class="conversations-section">
+        <h2 class="section-title">My conversations</h2>
+        <ul class="conversation-list">
+          <li
+            class="conversation-item"
+            *ngFor="let conversation of conversations"
+            (click)="navigateToConversation(conversation.id)"
+          >
+            {{ conversation.title }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

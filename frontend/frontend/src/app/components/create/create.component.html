@@ -1,0 +1,29 @@
+<div class="create-container">
+    <form (submit)="createConversation($event)">
+      <input
+        type="text"
+        placeholder="Title"
+        class="input-field"
+        [(ngModel)]="title"
+        name="name"
+        required
+      />
+  
+      <textarea
+        placeholder="#tags #tags_2 #history"
+        class="input-field"
+        [(ngModel)]="tags"
+        name="tags"
+      ></textarea>
+  
+      <textarea
+        placeholder="$user1 $test_user"
+        class="input-field"
+        [(ngModel)]="users"
+        name="users"
+      ></textarea>
+  
+      <button type="submit" class="submit-button">Create conversation</button>
+    </form>
+  </div>
+  
