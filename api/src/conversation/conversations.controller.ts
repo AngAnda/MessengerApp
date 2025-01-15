@@ -13,7 +13,7 @@ export class ConversationsController {
     //   return this.conversationService.getAllConversations();
     // }
   
-    @ApiOperation({ summary: 'Get covneration for user' }) 
+    @ApiOperation({ summary: 'Get converation for user' }) 
     @Get(':userId')
     async getConversationsForUser(@Param('userId') userId: number): Promise<Conversation[]> {
       return this.conversationService.getConversationsForUser(userId);

@@ -22,7 +22,7 @@ export class ConversationsService {
     }
   ];
 
-  private readonly baseUrl = 'https://api.example.com'; // URL-ul API-ului
+  private readonly baseUrl = 'https://api.example.com'; 
 
   constructor(private apiService: ApiService) {}
 
@@ -50,8 +50,8 @@ export class ConversationsService {
   getAllTags(): Observable<String[]>{
     return this.apiService.get<string[]>('conversations/tags');
   }
-
-  createConversation(converastion:Conversation, userIds: number[]): Observable<Conversation> { // Endpoint pentru adăugare utilizatori
+// 
+  createConversation(converastion:Conversation, userIds: number[]): Observable<Conversation> {
     const conversationDto={
       title: converastion.title,
       userIds: userIds,

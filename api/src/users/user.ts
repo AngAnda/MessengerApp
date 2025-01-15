@@ -1,4 +1,3 @@
-// import { UserConversation } from '../conversation/user-conversation';
 import { UserConversation } from '../conversation/user-conversation';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 

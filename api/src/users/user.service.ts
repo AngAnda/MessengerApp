@@ -26,11 +26,11 @@ export class UsersService {
 
   async findAll(): Promise<UserDto[]> {
     const users =  this.usersRepository.find();
-    // return (await users).map(user =>({
-    //   id: user.id,
-    //   username: user.username
-    // }));
-    return users;
+    //return users;
+    return (await users).map(user =>({
+      id: user.id,
+      username: user.username
+    }));
   }
 
   async findByUsername(username: string): Promise<User | undefined> {
@@ -67,4 +67,5 @@ export class UsersService {
 
     return this.userConversationsRepository.save(userConversation);
   }
+  
 }
