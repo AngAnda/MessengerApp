@@ -43,3 +43,11 @@ Start the Angular development server with the following command:
 cd frontend/frontend
 ng serve -o
 ```
+
+## Messenger app
+![image](https://github.com/user-attachments/assets/547c99e5-e9a3-4765-8411-b7ed44fc0654)
+![image](https://github.com/user-attachments/assets/f167792b-47f1-4fe0-b540-1942fccc4c1f)
+![image](https://github.com/user-attachments/assets/57ad282b-4bfc-437c-9c14-df5684c92d9c)
+![image](https://github.com/user-attachments/assets/fa1784c9-907c-4a3d-bdf0-1aea9cffebc0)
+![image](https://github.com/user-attachments/assets/cdbfd71f-ea5e-4d2f-b8ad-12d1fe9f3d2a)
+![image](https://github.com/user-attachments/assets/95ae3cbc-3623-41de-b588-931bdaa0eafd)
