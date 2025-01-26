@@ -19,7 +19,7 @@ export class Conversation {
 }
 
 
-@Entity()
+@Entity('tag')
 export class Tag {
     @PrimaryGeneratedColumn()
     id: number;

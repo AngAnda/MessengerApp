@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MessagesService } from './messages.service';
+import { MessagesService } from '../messages/messages.service';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Message } from './messages';
+import { Message } from '../messages/messages';
 
 const mockMessageRepository = {
   create: jest.fn(),

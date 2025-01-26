@@ -8,6 +8,9 @@ import { ChatGateway } from './chat/chat.gateway';
 import { ConversationModule } from './conversation/conversation.module';
 import { ConversationsService } from './conversation/conversations.service';
 import { MessagesModule } from './messages/messages.module';
+import { User } from './users/user';
+import { Conversation, Tag } from './conversation/conversations.entity';
+import { UserConversation } from './conversation/user-conversation';
 
 @Module({
   imports: [
@@ -26,6 +29,7 @@ import { MessagesModule } from './messages/messages.module';
         database: configService.get<string>('DB_DATABASE'),
         autoLoadEntities: true,
         synchronize: true,
+        entities: [Tag, UserConversation, Conversation, User],
       }),
     }),   
     UsersModule,

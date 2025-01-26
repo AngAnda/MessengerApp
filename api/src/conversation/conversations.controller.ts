@@ -65,7 +65,7 @@ export class ConversationsController {
     }
 
     @Get('tags')
-    async getAllTags(): Promise<String[]> {
+    async getAllTags(): Promise<Tag[]> {
         return this.conversationService.getAllTags();
     }
 }
