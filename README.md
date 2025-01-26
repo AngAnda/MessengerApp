@@ -29,7 +29,7 @@ The project uses Docker to create a container for the database. To set up the da
 docker-compose up -d
 ```
 
-### 2. Set Up NestJs API
+### 3. Set Up NestJs API
 Launch the API server using the following command:
 ```bash
 cd api

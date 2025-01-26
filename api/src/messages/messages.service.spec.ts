@@ -36,10 +36,8 @@ describe('MessagesService', () => {
       const conversationId = 1;
       const content = 'Test Message';
 
-      // Call the method
       const result = await service.addMessage(conversationId, content);
 
-      // Verify that the message was created and saved
       expect(result).toEqual({ id: 1, conversationId: 1, content: 'Test Message' });
       expect(messageRepository.create).toHaveBeenCalledWith({ conversationId, content });
       expect(messageRepository.save).toHaveBeenCalledWith({ conversationId, content });
@@ -50,10 +48,8 @@ describe('MessagesService', () => {
     it('should return an array of message contents', async () => {
       const conversationId = 1;
 
-      // Call the method
       const result = await service.getMessagesByConversationId(conversationId);
 
-      // Verify that the result is an array of message contents
       expect(result).toEqual(['Test Message']);
       expect(messageRepository.find).toHaveBeenCalledWith({ where: { conversationId } });
     });

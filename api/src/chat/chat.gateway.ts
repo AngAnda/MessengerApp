@@ -12,20 +12,6 @@ export class ChatGateway implements OnModuleInit {
 
   onModuleInit() {
     this.wss = new WebSocketServer({ port: 3001 });
-
-
-    // this.wss.on('connection', (ws) => {
-    //   console.log('Client connected');
-
-    //   ws.on('message', (message) => {
-    //     this.wss.clients.forEach((client) =>
-    //     {
-    //       // if (client !== ws) {
-    //         client.send(message);
-    //       // }
-    //     })
-    //     console.log(`Received: ${message}`);
-    //   });  
      
     this.wss.on('connection', (ws) => {
       console.log('Client connected');
@@ -39,9 +25,7 @@ export class ChatGateway implements OnModuleInit {
           console.log(`Message received from chat ${chat}: ${message}`);
 
           this.wss.clients.forEach((client) => {
-            // if (client !== ws && client.readyState === 1) {
               client.send(JSON.stringify({ chat, message }));
-            // }
           });
         } catch (error) {
           console.error('Invalid message format:', error);

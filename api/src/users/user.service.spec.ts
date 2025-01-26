@@ -79,6 +79,7 @@ describe('UsersService', () => {
       user: { id: 1, username: 'testuser', email: 'test@example.com', password: 'password' },
       conversation: { id: 1, title: 'Test Conversation' },
     });
+    
   });
 
 });

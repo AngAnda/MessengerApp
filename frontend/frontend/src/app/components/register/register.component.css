@@ -4,14 +4,13 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100%; /* Asigură-te că ocupă întreaga lățime */
+    width: 100%; 
     background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
     font-family: 'Arial', sans-serif;
-    box-sizing: border-box; /* Pentru a evita eventuale probleme de dimensiuni */
+    box-sizing: border-box; 
   }
   
   
-  /* Box-ul de înregistrare */
   .register-form .box {
     background: white;
     padding: 2rem;
@@ -22,14 +21,12 @@
     animation: bounceIn 1s ease;
   }
   
-  /* Titlu */
   .register-form h2 {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 1.5rem;
   }
   
-  /* Câmpuri input */
   .register-form input {
     width: 100%;
     padding: 0.75rem;
@@ -40,14 +37,12 @@
     transition: 0.3s;
   }
   
-  /* Focus input */
   .register-form input:focus {
     border-color: #ff758c;
     box-shadow: 0 0 5px #ff758c;
     outline: none;
   }
   
-  /* Butonul de înregistrare */
   .register-form button {
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     color: white;
@@ -60,13 +55,11 @@
     margin-top: 1rem;
   }
   
-  /* Hover pentru buton */
   .register-form button:hover {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   }
   
-  /* Animație pentru box */
   @keyframes bounceIn {
     0% {
       transform: scale(0.5);

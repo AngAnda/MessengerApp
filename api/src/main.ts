@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { WsAdapter } from '@nestjs/platform-ws' //Add this line
+import { WsAdapter } from '@nestjs/platform-ws'
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -31,11 +31,11 @@ async function bootstrap() {
     .setTitle('API Documentation')
     .setDescription('Descrierea API-ului aplicației')
     .setVersion('1.0')
-    .addTag('users') // Adaugă tag-uri pentru clasificarea rutelor
+    .addTag('users') 
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api-docs', app, document); // Accesează documentația la /api-docs
+  SwaggerModule.setup('api-docs', app, document); 
   
 
   await app.listen(3000);

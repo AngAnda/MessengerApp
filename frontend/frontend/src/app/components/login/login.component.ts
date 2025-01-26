@@ -29,7 +29,7 @@ export class LoginComponent {
           }
           else
           {
-            console.log('noooooope');
+            alert("Invalid credentials");
           }
             
         }

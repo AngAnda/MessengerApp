@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Conversation } from '../../models/Conversation'; // Reutilizează modelul
+import { Conversation } from '../../models/Conversation'; 
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

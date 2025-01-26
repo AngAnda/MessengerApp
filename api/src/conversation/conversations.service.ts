@@ -141,6 +141,6 @@ export class ConversationsService
 
   async getAllTags(): Promise<String[]> {
     const tags = await this.tagRepository.find();
-    return tags.map(tag => tag.name); // Extragi numele din rezultate
+    return tags.map(tag => tag.name);
     }
 }

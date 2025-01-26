@@ -1,4 +1,4 @@
-/* Fundal general */
+
 .login-container {
     display: flex;
     justify-content: center;
@@ -8,7 +8,6 @@
     font-family: 'Arial', sans-serif;
   }
   
-  /* Box-ul de login */
   .box {
     background: white;
     padding: 2rem;
@@ -22,14 +21,13 @@
     gap: 1rem;
   }
   
-  /* Titlu */
+
   .box h2 {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 1.5rem;
   }
   
-  /* Câmpuri input */
   .input-field {
     width: 100%;
     padding: 0.75rem;
@@ -40,14 +38,12 @@
     transition: 0.3s;
   }
   
-  /* Focus input */
   .input-field:focus {
     border-color: #ff758c;
     box-shadow: 0 0 5px #ff758c;
     outline: none;
   }
   
-  /* Butonul de login */
   .submit-button {
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     color: white;
@@ -64,7 +60,7 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   }
   
-  /* Animație pentru box */
+
   @keyframes bounceIn {
     0% {
       transform: scale(0.5);

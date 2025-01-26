@@ -59,7 +59,6 @@ export class ChatComponent implements OnInit{
       const userId = this.authService.getUserId();
       this.messagesService.addUserToConversation(this.chat, [userId]);
 
-      // this.websocketService.sendMessage(`${this.name}:${this.message}:${this.chat}`);
       this.websocketService.sendMessage(payload)
       console.log('send: this.message');
       this.message = '';

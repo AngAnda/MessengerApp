@@ -1,4 +1,3 @@
-/* Fundal general */
 body, html {
     margin: 0;
     padding: 0;
@@ -24,7 +23,6 @@ body, html {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.529);
   }
   
-  /* Secțiunea de profil */
   .profile-section {
     display: flex;
     flex-direction: column;
@@ -47,7 +45,6 @@ body, html {
     text-transform: capitalize;
   }
   
-  /* Butoane */
   .action-button {
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     color: white;
@@ -66,7 +63,6 @@ body, html {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   }
   
-  /* Secțiunea de conversații */
   .conversations-section {
     width: 400px;
   }
@@ -84,14 +80,14 @@ body, html {
   }
 
   .conversation-item {
-    background: #ffffff; /* Fundal alb */
-    color: #333; /* Text negru */
+    background: #ffffff;
+    color: #333; 
     padding: 0.75rem 1rem;
-    margin-bottom: 1rem; /* Distanța dintre conversații */
-    border-radius: 15px; /* Colțuri rotunjite vizibile */
+    margin-bottom: 1rem; 
+    border-radius: 15px; 
     cursor: pointer;
     transition: 0.3s;
-    border: 0.1rem solid #592931; /* Border colorat și grosime */
+    border: 0.1rem solid #592931;
     text-transform: uppercase;
     text-align: center;
   }

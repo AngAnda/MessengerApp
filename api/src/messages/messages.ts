@@ -6,8 +6,8 @@ export class Message{
     id: number;
 
     @Column()
-    conversationId: number; // ID-ul conversației de care aparține mesajul
+    conversationId: number;
   
     @Column()
-    content: string; // Conținutul mesajului
+    content: string; 
 }
