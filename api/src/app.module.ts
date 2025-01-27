@@ -29,7 +29,6 @@ import { UserConversation } from './conversation/user-conversation';
         database: configService.get<string>('DB_DATABASE'),
         autoLoadEntities: true,
         synchronize: true,
-        entities: [Tag, UserConversation, Conversation, User],
       }),
     }),   
     UsersModule,

@@ -137,11 +137,13 @@ export class ConversationsService
     });
   }
 
-  async getAllTags(): Promise<Tag[]> {
+  async getAllTags(): Promise<String[]> {
     try {
+      const totalCount = await this.tagRepository.count();
+      console.log(totalCount);
       const tags = await this.tagRepository.find();
-      console.log(tags);
-      return tags;
+      const tagName = tags.map(tag => tag.name);
+      return tagName;
     } catch (error) {
       console.error('Error fetching tags:', error);
       throw new Error('Error fetching tags');

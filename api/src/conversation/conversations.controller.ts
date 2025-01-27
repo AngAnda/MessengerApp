@@ -13,6 +13,13 @@ export class ConversationsController {
     //   return this.conversationService.getAllConversations();
     // }
   
+    @ApiOperation({ summary: 'Returns tags' }) 
+    @Get('tags')
+    async getAllTags(): Promise<String[]> {
+      return this.conversationService.getAllTags();
+    }
+
+
     @ApiOperation({ summary: 'Get converation for user' }) 
     @Get(':userId')
     async getConversationsForUser(@Param('userId') userId: number): Promise<Conversation[]> {
@@ -64,8 +71,10 @@ export class ConversationsController {
       return this.conversationService.getAllConversationsDto();
     }
 
-    @Get('tags')
-    async getAllTags(): Promise<Tag[]> {
-        return this.conversationService.getAllTags();
+    @ApiOperation({ summary: 'Returns a simple string' }) 
+    @Get('string')
+    getSimpleString(): string {
+      return "hello";
     }
+
 }
