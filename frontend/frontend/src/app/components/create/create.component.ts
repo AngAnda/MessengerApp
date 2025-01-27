@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { ConversationsService } from '../../../services/conversations.service';
 import { Conversation } from '../../models/Conversation';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -17,7 +18,11 @@ export class CreateComponent implements OnInit {
   title: string = '';
   tags: string = '';
   users: string = '';
-  mainUser: number = 0
+  mainUser: number = 0;
+  availableTags: String[] = [];
+  searchQuery: String = ''; 
+  filteredTags: String[] = []; 
+
 
   constructor(
     private router: Router,
@@ -29,15 +34,26 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
     const user =  this.authService.getUser()
     this.mainUser = this.mainUser = user && user.id ? user.id : 0;
+    this.conversationService.getAllTags().pipe(
+      catchError(error => {
+        console.error('Error fetching tags', error);
+        return of([]);
+      })
+    ).subscribe(tags => {
+      this.availableTags = tags; 
+      this.filteredTags = tags;
+    });
   }
 
   createConversation(event: Event): void {
     event.preventDefault();
 
+    const validTags = this.tags.split(' ').filter(tag => tag.trim() !== '');
+
     const newConversation : Conversation = {
       id: '0',
       title: this.title,
-      tags: this.tags.split(' '),
+      tags: validTags,
     };
 
     console.log('Creating conversation:', newConversation);
@@ -48,6 +64,18 @@ export class CreateComponent implements OnInit {
         this.router.navigate(['/mess', this.mainUser, data.id]);
       },
     })
-
   }
+
+
+  filterTags() {
+    console.log(this.searchQuery)
+    if (this.searchQuery) {
+      this.filteredTags = this.availableTags.filter(tag =>
+        tag.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.filteredTags = this.availableTags;
+    }
+  }
+  
 }
