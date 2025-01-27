@@ -40,4 +40,8 @@ export class LoginComponent {
   goToRegister() :  void{
     this.router.navigate(['/register'])
   }
+
+  goToRecover(): void{
+    this.router.navigate(['/update-password']);
+  }
 }

@@ -35,4 +35,13 @@ export class UsersController {
   ) {
     return this.usersService.addConversationToUser(userId, conversationId);
   }
+
+  @Post(':userId')
+  async updatePassword(
+    @Param('userId') userId: number,
+    @Body('password') password: string,
+  )
+  {
+    return this.usersService.updatePassword(userId, password);
+  }
 }

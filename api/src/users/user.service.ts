@@ -67,5 +67,33 @@ export class UsersService {
 
     return this.userConversationsRepository.save(userConversation);
   }
+
+  async findByEmail(email: string): Promise<number | undefined> {
+    const user = await this.usersRepository.findOne({
+      where: { email },
+    });
+
+    if (!user) {
+      return undefined; 
+    }
+    return user.id;  
+  }
+
+  async updatePassword(userId: number, newPassword: string): Promise<User> {
+
+    console.log(newPassword);
+    const user = await this.usersRepository.findOne({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+
+    user.password = newPassword;  
+    
+    console.log(user)
+    return this.usersRepository.save(user); 
+  }
   
 }

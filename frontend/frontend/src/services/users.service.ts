@@ -38,4 +38,11 @@ export class UserService {
     alert(`${userId}   ${convId}`)
     return this.apiService.post<void>(`users/${userId}/conversations/${convId}`);
   }
+
+  updatePassword(userId: number, password: string): Observable<void>{
+    const body = {
+      password: password
+    }
+    return this.apiService.post<void>(`users/${userId}`, body);
+  }
 }

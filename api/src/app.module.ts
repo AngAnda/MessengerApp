@@ -11,6 +11,8 @@ import { MessagesModule } from './messages/messages.module';
 import { User } from './users/user';
 import { Conversation, Tag } from './conversation/conversations.entity';
 import { UserConversation } from './conversation/user-conversation';
+import { MailService } from './mail/mail.service';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -34,9 +36,10 @@ import { UserConversation } from './conversation/user-conversation';
     UsersModule,
     CounterModule,
     ConversationModule,
-    MessagesModule
+    MessagesModule,
+    MailModule
   ],
-  providers:[ConversationsService, ChatGateway],
+  providers:[ConversationsService, ChatGateway, MailService],
   controllers: []
 })
 export class AppModule {}
