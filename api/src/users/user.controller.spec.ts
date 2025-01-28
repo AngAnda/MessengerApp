@@ -1,39 +1,47 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from './user.service';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest'; 
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { UsersController } from './users.controller';
+import { User } from './user';
+import * as request from 'supertest';  // Folosește supertest
+import { DataSource } from 'typeorm';
+import { Conversation, Tag } from '../conversation/conversations.entity';
+import { UserConversation } from '../conversation/user-conversation';
 
 describe('UsersController (integration)', () => {
-  let app: INestApplication;
-  let usersService = { 
-    createUser: jest.fn(), 
-    findAll: jest.fn(),
-    findOne: jest.fn(),
-    addConversationToUser: jest.fn(),
-    updatePassword: jest.fn(),
-  };
+  let app;
+  let usersService: UsersService;
+  let dataSource: DataSource;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [UsersController],
-      providers: [
-        { 
-          provide: UsersService, 
-          useValue: usersService 
-        },
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'sqlite',
+          database: ':memory:',
+          entities: [User, Conversation, Tag, UserConversation],
+          synchronize: true,
+          dropSchema: true,
+        }),
+        TypeOrmModule.forFeature([User, Conversation, Tag, UserConversation]), 
       ],
+      controllers: [UsersController],
+      providers: [UsersService],
     }).compile();
 
     app = module.createNestApplication();
     await app.init();
+
+    usersService = app.get(UsersService);
+    dataSource = app.get(DataSource);
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 
   it('should create a new user', async () => {
     const newUser = { id: 1, username: 'testuser', email: 'test@example.com' };
-    usersService.createUser.mockReturnValue(newUser);
-
     const response = await request(app.getHttpServer())
       .post('/users')
       .send({
@@ -41,66 +49,71 @@ describe('UsersController (integration)', () => {
         email: 'test@example.com',
         password: 'password123',
       })
-      .expect(201);
+      .expect(201);  
 
-    expect(response.body).toEqual(newUser);
-    expect(usersService.createUser).toHaveBeenCalledWith('testuser', 'test@example.com', 'password123');
+    expect(response.body.id).toBeDefined();
+    expect(response.body.username).toBe('testuser');
+    expect(response.body.email).toBe('test@example.com');
   });
 
-  it('should return all users', async () => {
-    const users = [
-      { id: 1, username: 'testuser', email: 'test@example.com' }
-    ];
-    usersService.findAll.mockReturnValue(users);
 
-    const response = await request(app.getHttpServer())
-      .get('/users')
-      .expect(200);
+  it('should find all users', async () => {
+    const user2 = await usersService.createUser('user2', 'user2@example.com', 'password123');
+    
+    const users = await usersService.findAll();
 
-    expect(response.body).toEqual(users);
-    expect(usersService.findAll).toHaveBeenCalled();
+    expect(users.length).toBe(2);
+    expect(users[0].username).toBe('testuser');
+    expect(users[1].username).toBe('user2');
   });
 
-  it('should return user by ID', async () => {
-    const user = { id: 1, username: 'testuser', email: 'test@example.com' };
-    usersService.findOne.mockReturnValue(user);
+  it('should find user by username', async () => {
+    const user = await usersService.createUser('user3', 'user3@example.com', 'password123');
+    const foundUser = await usersService.findByUsername('user3');
 
-    const response = await request(app.getHttpServer())
-      .get('/users/1')
-      .expect(200);
+    expect(foundUser).toBeDefined();
+    expect(foundUser.username).toBe('user3');
+    expect(foundUser.email).toBe('user3@example.com');
+  });
 
-    expect(response.body).toEqual(user);
-    expect(usersService.findOne).toHaveBeenCalledWith(1);
+  it('should find user by ID', async () => {
+    const user = await usersService.createUser('user4', 'user4@example.com', 'password123');
+    const foundUser = await usersService.findOne(user.id);
+
+    expect(foundUser).toBeDefined();
+    expect(foundUser.id).toBe(user.id);
   });
 
   it('should add conversation to user', async () => {
-    const userId = 1;
-    const conversationId = 2;
-    usersService.addConversationToUser.mockReturnValue({ userId, conversationId });
+    const user = await usersService.createUser('user5', 'user5@example.com', 'password123');
+    
+    const conversationRepository = dataSource.getRepository(Conversation);  
+    const conversation = new Conversation();
+    conversation.title = 'Test Conversation';
+    const savedConversation = await conversationRepository.save(conversation);  
+    
+    const userConversation = await usersService.addConversationToUser(user.id, savedConversation.id);
+  
+    expect(userConversation).toBeDefined();
+    expect(userConversation.user.id).toBe(user.id);
+    expect(userConversation.conversation.id).toBe(savedConversation.id);
+  });
+  
 
-    const response = await request(app.getHttpServer())
-      .post('/users/1/conversations/2')
-      .expect(201);
-
-    expect(response.body).toEqual({ userId, conversationId });
-    expect(usersService.addConversationToUser).toHaveBeenCalledWith(userId, conversationId);
+  it('should find user by email', async () => {
+    const user = await usersService.createUser('user6', 'user6@example.com', 'password123');
+    const userId = await usersService.findByEmail('user6@example.com');
+    
+    expect(userId).toBeDefined();
+    expect(userId).toBe(user.id);
   });
 
   it('should update user password', async () => {
-    const userId = 1;
+    const user = await usersService.createUser('user7', 'user7@example.com', 'password123');
     const newPassword = 'newpassword123';
-    usersService.updatePassword.mockReturnValue({ id: userId, password: newPassword });
 
-    const response = await request(app.getHttpServer())
-      .post('/users/1')
-      .send({ password: newPassword })
-      .expect(200);
+    const updatedUser = await usersService.updatePassword(user.id, newPassword);
 
-    expect(response.body.password).toBe(newPassword);
-    expect(usersService.updatePassword).toHaveBeenCalledWith(userId, newPassword);
-  });
-
-  afterAll(async () => {
-    await app.close();
+    expect(updatedUser.password).toBe(newPassword);
   });
 });

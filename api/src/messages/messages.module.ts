@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MessagesService } from './messages.service';
 import { MessagesController } from './messages.controller';
 import { Message } from './messages';
+import { ConversationsService } from 'src/conversation/conversations.service';
+import { UsersService } from 'src/users/user.service';
 
 @Module({
   imports: [
@@ -10,6 +12,6 @@ import { Message } from './messages';
   ],
   providers: [MessagesService], 
   controllers: [MessagesController],
-  exports: [MessagesService], 
+  exports: [MessagesService, ConversationsService, UsersService], 
 })
 export class MessagesModule {}
