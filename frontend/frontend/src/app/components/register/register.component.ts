@@ -7,8 +7,8 @@ import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
-  standalone: true,  // Componenta este standalone
-  imports: [CommonModule, FormsModule],  // Asigură-te că FormsModule este importat
+  standalone: true,  
+  imports: [CommonModule, FormsModule], 
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })

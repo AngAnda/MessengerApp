@@ -41,12 +41,10 @@ export class ProfileComponent implements OnInit {
   }
 
   createConversation(): void {
-    alert('Navighează la crearea unei conversații!');
     this.router.navigate(['/create', this.userId])
   }
 
   exploreConversations(): void {
-    alert('Navighează la explorarea conversațiilor!');
     this.router.navigate(['/explore', this.userId])
   }
 }

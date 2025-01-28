@@ -64,9 +64,8 @@ export class ExploreComponent implements OnInit {
   randomConversation(): void {
     const randomIndex = Math.floor(Math.random() * this.conversations.length);
     const randomConversation = this.conversations[randomIndex];
-    alert(`Random conversation: ${randomConversation.title}`);
-    this.authService.setConversationId(randomConversation.id);
-    this.router.navigate(['/conversation', randomConversation.id]);
+    this.authService.setConversationId(randomIndex.toString());
+    this.router.navigate(['/mess', this.user, randomIndex]);
   }
 
   onTagClick(tag: String): void {
