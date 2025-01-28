@@ -6,6 +6,8 @@ import { UserDto } from './userDto';
 import { Conversation } from '../conversation/conversations.entity';
 import { UserConversation } from '../conversation/user-conversation';
 
+
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -26,7 +28,7 @@ export class UsersService {
 
   async findAll(): Promise<UserDto[]> {
     const users =  this.usersRepository.find();
-    return users;
+    //return users;
     return (await users).map(user =>({
       id: user.id,
       username: user.username

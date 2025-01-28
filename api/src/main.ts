@@ -29,9 +29,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('API Documentation')
-    .setDescription('Descrierea API-ului aplicației')
+    .setDescription('MessengerApp API documentation')
     .setVersion('1.0')
-    .addTag('users') 
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
