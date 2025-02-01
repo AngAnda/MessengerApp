@@ -1,36 +1,56 @@
 services:
-  - name: nestjs-api
-    rutime: Docker
-    type: web
-    env: node
-    build:
-      dockerfilePath: ./api/Dockerfile  
-    plan: free  
-    envVars:
-      - key: DB_HOST
-        value: nestjs-mysql-db
-      - key: DB_PORT
-        value: "3306"
-      - key: DB_USERNAME
-        value: user
-      - key: DB_PASSWORD
-        value: abc123
-      - key: DB_DATABASE
-        value: nestjs-mysql-db
-    autoDeploy: true
+  # - name: nestjs-api
+  #   type: web
+  #   env: node
+  #   build:
+  #     dockerfilePath: ./api/Dockerfile  
+  #   envVars:
+  #     - key: DB_HOST
+  #       value: nestjs-mysql-db
+  #     - key: DB_PORT
+  #       value: "3306"
+  #     - key: DB_USERNAME
+  #       value: user
+  #     - key: DB_PASSWORD
+  #       value: abc123
+  #     - key: DB_DATABASE
+  #       value: nestjs-mysql-db
+  #   autoDeploy: true
 
-  - name: nestjs-mysql-db
-    type: web
-    env: mysql
-    plan: free  
-    database: mysql
-    envVars:
-      - key: MYSQL_ROOT_PASSWORD
-        value: abc123
-      - key: MYSQL_DATABASE
-        value: users
-      - key: MYSQL_USER
-        value: user
-      - key: MYSQL_PASSWORD
-        value: abc123
+  # - name: nestjs-mysql-db
+  #   type: web
+  #   env: mysql
+  #   database: mysql
+  #   envVars:
+  #     - key: MYSQL_ROOT_PASSWORD
+  #       value: abc123
+  #     - key: MYSQL_DATABASE
+  #       value: users
+  #     - key: MYSQL_USER
+  #       value: user
+  #     - key: MYSQL_PASSWORD
+  #       value: abc123
 
+  - type: pserv
+    name: mysql
+    plan: free
+    env: docker
+    autoDeploy: false
+    disk:
+      name: mysql
+      mountPath: /var/lib/mysql
+      sizeGB: 10
+    envVars:
+    - fromGroup: mysql
+
+  envVarGroups:
+  - name: mysql
+    envVars:
+    - key: MYSQL_DATABASE
+      value: mysql
+    - key: MYSQL_USER
+      value: mysql
+    - key: MYSQL_PASSWORD
+      value: abc123
+    - key: MYSQL_ROOT_PASSWORD
+      value: abc123
