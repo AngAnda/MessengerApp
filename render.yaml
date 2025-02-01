@@ -1,0 +1,35 @@
+services:
+  - name: nestjs-api
+    type: web
+    env: node
+    build:
+      dockerfilePath: api/Dockerfile  # Asigură-te că ai un Dockerfile pentru API
+    plan: free  # Plan gratuit
+    envVars:
+      - key: DB_HOST
+        value: nestjs-mysql-db
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_USERNAME
+        value: ${DB_USERNAME}  # Înlocuiește cu variabilele tale
+      - key: DB_PASSWORD
+        value: ${DB_PASSWORD}
+      - key: DB_DATABASE
+        value: ${DB_DATABASE}
+    autoDeploy: true
+
+  - name: nestjs-mysql-db
+    type: database
+    env: mysql
+    plan: free  # Plan gratuit pentru MySQL
+    database: mysql
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        value: ${DB_PASSWORD}
+      - key: MYSQL_DATABASE
+        value: ${DB_DATABASE}
+      - key: MYSQL_USER
+        value: ${DB_USERNAME}
+      - key: MYSQL_PASSWORD
+        value: ${DB_PASSWORD}
+

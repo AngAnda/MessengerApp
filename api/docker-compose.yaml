@@ -9,11 +9,11 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - '${DB_PORT}:3306'
+      - '3306'
     volumes:
       - mysql_data:/var/lib/mysql
-    # networks:
-    #   - backend_network
+    networks:
+      - backend_network
 
   api:
     build:
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: nestjs-container
     ports:
-      - "3000:3000"
+      - "3000"
     environment:
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
@@ -35,23 +35,23 @@ services:
     networks:
       - backend_network
 
-  # api2:
-  #   build:
-  #     context: ./ 
-  #     dockerfile: Dockerfile
-  #   container_name: nestjs-container2
-  #   ports:
-  #     - "3002:3000"  
-  #   environment:
-  #     DB_HOST: ${DB_HOST}
-  #     DB_PORT: ${DB_PORT}
-  #     DB_USERNAME: ${DB_USERNAME}
-  #     DB_PASSWORD: ${DB_PASSWORD}
-  #     DB_DATABASE: ${DB_DATABASE}
-  #   depends_on:
-  #     - db 
-  #   networks:
-  #     - backend_network
+  api2:
+    build:
+      context: ./ 
+      dockerfile: Dockerfile
+    container_name: nestjs-container2
+    ports:
+      - "3002"  
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    depends_on:
+      - db 
+    networks:
+      - backend_network
   
   nginx:
     image: nginx:latest

@@ -18,9 +18,4 @@ export class MailService {
     console.log(body);
     return this.apiService.post<any>("mail", { "email": email});
   } 
-  
-  UpdatePassword()
-  {
-
-  }
 }

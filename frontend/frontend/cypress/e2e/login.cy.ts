@@ -4,7 +4,6 @@ describe('Login Test', () => {
         cy.visit('http://localhost:4200/login');
         
         cy.get('input[name="username"]').type(user.username);
-        //cy.get('input[name="email"]').type(user.email);
         cy.get('input[name="password"]').type(user.password);
         
         cy.get('button.submit-button').contains('Login').click();

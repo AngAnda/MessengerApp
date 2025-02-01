@@ -15,7 +15,7 @@ describe('Full User Flow Test', () => {
 
         cy.url().should('include', '/explore');
     
-        cy.get('input.search-input').type('#tag1'); 
+        cy.get('input.search-input').type('#programming'); 
         cy.get('button#search-button').click(); 
     
         cy.get('.conversation-item').should('have.length.greaterThan', 0); 
@@ -24,9 +24,9 @@ describe('Full User Flow Test', () => {
     
         cy.get('input.search-input').should('have.value', '');  
         
-        cy.get('.tag-item').eq(3).click(); // Selectează al patrulea element (indexul începe de la 0)
+        cy.get('.tag-item').eq(0).click(); 
  
-        cy.get('input.search-input').should('have.value', '#good-for-nothing'); 
+        cy.get('input.search-input').should('have.value', '#programming'); 
         
         cy.get('button.random-button').click();
         

@@ -20,6 +20,10 @@ describe('Full User Flow Test', () => {
         cy.get('textarea[name="tags"]').type('tag1, tag2, tag3');
 
         cy.get('form').submit(); 
+
+        cy.get('.submit-button').contains('Create conversation').click();
+
+        cy.url().should('include', '/mess');
       });
     });
   });

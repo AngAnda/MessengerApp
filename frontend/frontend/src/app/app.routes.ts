@@ -13,7 +13,7 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent},
-    { path: 'mess/:name/:chat', component: ChatComponent, canActivate: [AuthGuard, ConversationGuard] },
+    { path: 'mess/:name/:chat', component: ChatComponent, canActivate: [AuthGuard] },
     { path: 'register', component: RegisterComponent},
     { path: 'profile/:name', component: ProfileComponent, canActivate: [AuthGuard]},
     { path: 'explore/:name', component: ExploreComponent, canActivate: [AuthGuard]},

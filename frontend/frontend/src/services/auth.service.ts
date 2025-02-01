@@ -16,6 +16,7 @@ export class AuthService {
   login(username: string, password: string): Observable<boolean> {
     return this.apiService.get<any[]>('users').pipe(
       map(users => {
+        console.log(users);
         const user = users.find(
           u=> u.username === username && u.password === password
         );

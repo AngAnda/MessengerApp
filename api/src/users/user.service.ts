@@ -26,13 +26,9 @@ export class UsersService {
     return this.usersRepository.save(newUser);
   }
 
-  async findAll(): Promise<UserDto[]> {
+  async findAll(): Promise<User[]> {
     const users =  this.usersRepository.find();
-    //return users;
-    return (await users).map(user =>({
-      id: user.id,
-      username: user.username
-    }));
+    return users;
   }
 
   async findByUsername(username: string): Promise<User | undefined> {
