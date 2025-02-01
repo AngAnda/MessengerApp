@@ -4,7 +4,7 @@ services:
     type: web
     env: node
     build:
-      dockerfilePath: api/Dockerfile  
+      dockerfilePath: ./api/Dockerfile  
     plan: free  
     envVars:
       - key: DB_HOST
