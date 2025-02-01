@@ -1,5 +1,6 @@
 services:
   - name: nestjs-api
+    rutime: Docker
     type: web
     env: node
     build:
@@ -11,11 +12,11 @@ services:
       - key: DB_PORT
         value: "3306"
       - key: DB_USERNAME
-        value: ${DB_USERNAME} 
+        value: user
       - key: DB_PASSWORD
-        value: ${DB_PASSWORD}
+        value: abc123
       - key: DB_DATABASE
-        value: ${DB_DATABASE}
+        value: nestjs-mysql-db
     autoDeploy: true
 
   - name: nestjs-mysql-db
@@ -25,11 +26,11 @@ services:
     database: mysql
     envVars:
       - key: MYSQL_ROOT_PASSWORD
-        value: ${DB_PASSWORD}
+        value: abc123
       - key: MYSQL_DATABASE
-        value: ${DB_DATABASE}
+        value: users
       - key: MYSQL_USER
-        value: ${DB_USERNAME}
+        value: user
       - key: MYSQL_PASSWORD
-        value: ${DB_PASSWORD}
+        value: abc123
 
